@@ -4,9 +4,9 @@ Docker を用いて Elixir/Phoenix アプリケーションの開発・学習を
 
 ## 構築される環境
 
-* Erlang/OTP 23
-* Elixir 1.11.3
-* Phoenix 1.5.7
+* Erlang/OTP 24
+* Elixir 1.13.4
+* Phoenix 1.6.15
 
 ## 必要なソフトウェア
 
@@ -54,7 +54,7 @@ Docker Desktopを使用しない(できない)場合、以下のサイトを参�
 ### dockerコンテナ入手、デプロイ、立ち上げ
 
 ```bash
-git clone https://github.com/naritomo08/elixir-docker-db.git elixir-docker-db
+git clone -b phx1.6 https://github.com/naritomo08/elixir-docker-db.git elixir-docker-db
 cd elixir-docker-db
 sudo bin/setup.sh
 sudo bin/start.sh
@@ -73,6 +73,14 @@ sudo bin/login.sh
 ```bash
 mix phx.new testsite --database postgres
 →yを選択する。
+cd testsite
+vi config/dev.exs
+8行目を"hostname: "postgres","にする。
+22行目を"http: [ip: {0, 0, 0, 0}, port: 4000],"にする。
+vi config/test.exs
+12行目を"hostname: "postgres","にする。
+*Phoenix1.6の場合
+22行目を"http: [ip: {0, 0, 0, 0}, port: 4000],"にする。
 cd config/testsite
 vi dev.exs
 8行目を"hostname: "postgres","にする。
@@ -107,7 +115,7 @@ http://localhost:8081
   - サーバ: postgres
   - ユーザ名: postgres
   - パスワード:postgres
-  
+
 * ログイン情報(mariadb)
   - データベース種類: mysql
   - サーバ: mariadb
